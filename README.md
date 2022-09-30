@@ -57,6 +57,7 @@ Quelle syntaxe est utilisée pour ce fichier ?
 1. Ajoutez les répertoires et fichiers issus de la compilation aux fichiers ignorés par `git` (cf. [`.gitignore` pour Java](https://github.com/github/gitignore/blob/main/Java.gitignore));
     ```bash
     # Copier ici le contenu de `.gitignore`
+    
     ```
 1. Retirez les fichiers de configuration de l'IDE du projet;
     ```bash
@@ -68,6 +69,9 @@ Quelle syntaxe est utilisée pour ce fichier ?
     ```
 1. Configurez l'accès par clé publique/clé privée à la forge (cf. [Connecting to GitHub with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)).
     > Expliquez la procédure de façon synthétique
+    - J'ajoute une clé SSH localement en utilisant la commande  :  ssh-keygen -t ed25519 -C "ha_bouali@esi.dz", je le mets dans un fichier et je choisis un passphrase
+    - En conséquant, j'ai une authentification sauvegardé ainsi qu'une clé publique, et une clé SHA256.
+    - 
 
 ## Partie II (à faire durant le TD) : compléter la classe `Fraction`
 Dans cet partie, vous compléterez les classes `Fraction` et `Main`.
@@ -80,6 +84,8 @@ Vous respecterez les consignes ci-dessous :
 1. Ajoutez les attributs représentants le numérateur et le dénominateur (nombres entiers).
     ```Java
     // Déclaration des attributs
+    private int denominateur;
+    private int nominateur;
     ```
 1. Ajoutez les constructeurs (cf. [Constructor Declarations](https://docs.oracle.com/javase/specs/jls/se19/html/jls-8.html#jls-8.8)) suivants :
     * initialisation avec un numérateur et un dénominateur,
@@ -87,18 +93,49 @@ Vous respecterez les consignes ci-dessous :
     * initialisation sans argument (numérateur égal _0_ et dénominateur égal à _1_),
     ```Java
     // Assertions pour tester les constructeurs (avec toString)
+    La methode toString() : 
+    public String toString() {
+        return "Resultat de la fraction : " + this.nominateur /  this.denominateur + "\n";
+    }
+    Les assertions de tests : 
+     Fraction m1 = new Fraction(5, 35); // On donne des valeurs aux paramètres du constructeur
+        Fraction m2 = new Fraction(25); // On donne une valeur juste ay nominateur
+        Fraction m3 = new Fraction();
+        System.out.println(m1.toString() + m2.toString() + m3.toString());
     ```
 1. Ajoutez les fractions constantes ZERO (0, 1) et UN (1, 1) (cf. [Constants in Java](https://www.baeldung.com/java-constants-good-practices)),
     ```Java
     // Déclaration des constantes
+    Fraction ZERO = new Fraction(0, 1); // La constante ZERO
+    Fraction UN = new Fraction(1, 1); // La constante UN
     ```
 1. Ajoutez une méthode de consultation du numérateur et du dénominateur (par convention, en Java, une méthode retournant la valeur de l'attribut `anAttribute` est nommée `getAnAttribute`),
     ```Java
-    // Définition des getters
+    // Définition des getters : 
+    
+    public int getDenominateurr() {
+    return denominateur; 
+    }
+
+    public int getNominateur() {
+    return nominateur;
+    }
+    
     ```
 1. Ajoutez une méthode de consultation de la valeur sous la forme d'un nombre en virgule flottante (méthode `doubleValue()`) (cf. [`java.lang.Number`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Number.html)),
    ```Java
+   
+    La methode doubleValue() : 
+    
+     public double doubleValue(){   
+        double d1 = this.nominateur;
+        double d2 = this.denominateur  ;   
+        return (d1 / d2);
+    }
+    
+    
     // Assertions pour tester la conversion
+    System.out.println(m1.doubleValue());
     ```
 1. Ajoutez une méthode permettant l'addition de deux fractions (la méthode `add` prend en paramètre *une* fraction et *retourne* la somme de la fraction courante et du paramètre),
    ```Java
@@ -107,6 +144,7 @@ Vous respecterez les consignes ci-dessous :
 1. Ajoutez le test d'égalité entre fractions (deux fractions sont égales si elles représentent la même fraction réduite) (cf. [`java.lang.Object.equals`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object))),
    ```Java
     // Assertions pour tester l'égalité
+    
     ```
 1. Ajoutez la comparaison de fractions selon l'ordre naturel (cf. [`java.lang.Comparable`](https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/Comparable.html)).
    ```Java
